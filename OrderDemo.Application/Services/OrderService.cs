@@ -30,7 +30,8 @@ namespace OrderDemo.Application.Services {
 
             try {
                 // Check if customer exists
-                Customer? customer = await _context.Customers.Include(c => c.Orders)
+                // OPTIMIZATION: Eagerly load the Customer along with their Orders to prevent N+1 queries
+                Customer? customer = await _context.Customers.Include(c => c.Orders) // <--- OPTIMIZATION ALREADY HERE
                     .FirstOrDefaultAsync(c => c.Id == request.CustomerId, cancellationToken);
 
                 if (customer == null) {
