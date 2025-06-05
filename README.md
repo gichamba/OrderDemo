@@ -57,7 +57,7 @@ The solution is structured into four distinct projects, adhering to Clean Archit
     cd OrderDemo.WebApi
     dotnet run
     ```
-    The API will typically run on `http://localhost:5277` or `http://localhost:7277` (HTTPS).
+    The API will typically run on `http://localhost:5277` or `https://localhost:7277` (HTTPS).
 4.  **Run Tests:**
     Navigate to the `OrderDemo.WebApi.IntegrationTests` directory and run:
     ```bash
@@ -86,7 +86,7 @@ This optimization significantly reduces the number of database queries required 
 
 ## API Documentation
 
-The API endpoints are self-documented using **Swagger/OpenAPI**. When the application is running in development mode, the Swagger UI is accessible at the `/swagger` endpoint (e.g., `http://localhost:5000/swagger`). This provides an interactive interface for exploring and testing the API.
+The API endpoints are self-documented using **Swagger/OpenAPI**. When the application is running in development mode, the Swagger UI is accessible at the `/swagger` endpoint (e.g., `http://localhost:5277/swagger`). This provides an interactive interface for exploring and testing the API.
 
 ## Assumptions Made
 
