@@ -29,8 +29,7 @@ namespace OrderDemo.WebApi.IntegrationTests.Configuration {
             builder.UseContentRoot(webApiContentRoot);
 
             builder.ConfigureServices(services => {
-                ServiceDescriptor? descriptor = services.SingleOrDefault(
-                    d => d.ServiceType == typeof(DbContextOptions<OrderDemoContext>));
+                ServiceDescriptor? descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<OrderDemoContext>));
 
                 if (descriptor != null) {
                     services.Remove(descriptor);
@@ -45,8 +44,7 @@ namespace OrderDemo.WebApi.IntegrationTests.Configuration {
                 using IServiceScope scope = sp.CreateScope();
                 IServiceProvider scopedServices = scope.ServiceProvider;
                 OrderDemoContext db = scopedServices.GetRequiredService<OrderDemoContext>();
-                ILogger logger = scopedServices
-                    .GetRequiredService<ILogger<CustomWebApplicationFactory<TProgram>>>();
+                ILogger logger = scopedServices.GetRequiredService<ILogger<CustomWebApplicationFactory<TProgram>>>();
 
                 db.Database.EnsureCreated();
 

@@ -43,8 +43,12 @@ namespace OrderDemo.WebApi.Extensions {
             CancellationToken cancellationToken) {
             OneOf<Success<OrderResponse>, ValidationFailure, NotFound, UnexpectedError> result = await orderService.CreateOrderAsync(request, cancellationToken);
 
-            return result.Match(success => Results.Created($"/orders/{success.Data.Id}", success.Data), validationFailure => Results.ValidationProblem(validationFailure.Errors.ToDictionary(
-                        error => string.Join(", ", error.MemberNames), error => new[] { error.Message })), notFound => Results.NotFound(notFound.Message), unexpectedError => Results.Problem(unexpectedError.Message, statusCode: 500)
+            return result.Match(
+                success => Results.Created($"/orders/{success.Data.Id}", success.Data), 
+                validationFailure => Results.ValidationProblem(validationFailure.Errors.ToDictionary(
+                        error => string.Join(", ", error.MemberNames), error => new[] { error.Message })), 
+                notFound => Results.NotFound(notFound.Message), 
+                unexpectedError => Results.Problem(unexpectedError.Message, statusCode: 500)
             );
         }
 
@@ -98,7 +102,8 @@ namespace OrderDemo.WebApi.Extensions {
             CancellationToken cancellationToken) {
             OneOf<Success<OrderResponse>, ValidationFailure, NotFound, UnexpectedError> result = await orderService.UpdateOrderStatusAsync(request, cancellationToken);
 
-            return result.Match(success => Results.Ok(success.Data),
+            return result.Match(
+                success => Results.Ok(success.Data),
                 validationFailure => Results.ValidationProblem(validationFailure.Errors.ToDictionary(error => string.Join(", ", error.MemberNames), error => new[] { error.Message })),
                 notFound => Results.NotFound(notFound.Message),
                 unexpectedError => Results.Problem(unexpectedError.Message, statusCode: 500)

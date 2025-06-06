@@ -1,18 +1,14 @@
 ﻿using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OrderDemo.Application.DataTransferObjects.Orders;
 using OrderDemo.Domain.Enums;
+using OrderDemo.WebApi.IntegrationTests.Configuration;
 using System.Net;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using OrderDemo.WebApi.IntegrationTests.Configuration;
-using Xunit;
 
 namespace OrderDemo.WebApi.IntegrationTests.Endpoints {
-    public class OrderEndpointsTests(CustomWebApplicationFactory<Program> factory)
-        : IClassFixture<CustomWebApplicationFactory<Program>> {
+    public class OrderEndpointsTests(CustomWebApplicationFactory<Program> factory) : IClassFixture<CustomWebApplicationFactory<Program>> {
         private readonly HttpClient _client = factory.CreateClient();
         private readonly ILogger<OrderEndpointsTests> _logger = factory.Services.GetRequiredService<ILogger<OrderEndpointsTests>>();
 
